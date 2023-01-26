@@ -1,0 +1,6 @@
+_/raw/drivers_interactive-rk3588
+_/raw/rk3588-devices
+_/src/rk3588-platform_drv
+_/src/rk3588_usb_host_drv
+_/src/rk3588_fb_drv
+_/src/event_filter
