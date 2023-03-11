@@ -28,6 +28,7 @@ namespace Hw::rk3588_board {
 		UART_BASE  = 0xfeb50000,
 		UART_SIZE  = 0x1000,
 		UART_CLOCK = 0,
+		NR_OF_CPUS = 4,
 	};
 
 	namespace Cpu_mmio {

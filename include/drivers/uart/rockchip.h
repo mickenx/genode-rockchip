@@ -246,6 +246,9 @@ class Genode::rockchip_uart: Mmio
 
 	public:
 
+	void init()
+	{
+	}
 		/**
 		 * Constructor
 		 *
