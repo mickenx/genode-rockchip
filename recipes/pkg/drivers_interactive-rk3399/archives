@@ -1,0 +1,6 @@
+_/raw/drivers_interactive-rk3399
+_/raw/rk3399-devices
+_/src/rk3399_platform_drv
+_/src/rk3399_usb_host_drv
+_/src/rk3399_fb_drv
+_/src/event_filter

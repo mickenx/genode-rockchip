@@ -1,0 +1,12 @@
+<devices>
+
+        <device name="usb_host_2" type="snps,dwc3">
+                <io_mem       address="0xfc400000" size="0x400000"/>
+                <irq          number="253"/>
+
+        </device>
+        <device name="vop" type="fsl,imx53-ipu">
+                <io_mem address="0xff900000" size="0x2000000"/>
+        </device>
+
+</devices>
