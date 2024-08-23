@@ -1,5 +1,7 @@
 /*
  * \brief  Driver for Freescale's i.MX UART
+ * \brief  Rehacked for RockChip
+ * \author Michael Grunditz
  * \author Norman Feske
  * \author Martin Stein
  * \date   2012-08-30
@@ -12,8 +14,8 @@
  * under the terms of the GNU Affero General Public License version 3.
  */
 
-#ifndef _INCLUDE__DRIVERS__UART__IMX_H_
-#define _INCLUDE__DRIVERS__UART__IMX_H_
+#ifndef _INCLUDE__DRIVERS__UART__ROCKCHIP_H_
+#define _INCLUDE__DRIVERS__UART__ROCKCHIP_H_
 
 /* Genode includes */
 #include <util/mmio.h>
@@ -24,7 +26,7 @@ namespace Genode { class rockchip_uart; }
 /**
  * Driver base for i.MX UART-module
  */
-class Genode::rockchip_uart: Mmio
+class Genode::rockchip_uart: Mmio<0xa2>
 {
 	/**
 	 * Control register 1
@@ -217,17 +219,14 @@ class Genode::rockchip_uart: Mmio
 	/**
 	 * Status register 2
 	 */
-	//struct Sr2 : Register<0x98, 32>
 	struct Sr2 : Register<0x14, 32>
 	{
 		struct Txdc : Bitfield<5, 5> { }; 
-		//struct Txdc : Bitfield<5, 1> { };
 	};
 
 	/**
 	 * Transmitter register
 	 */
-	//struct Txd : Register<0x40, 32>
 	struct Txd : Register<0x0, 32>
 	{
 		struct Tx_data : Bitfield<0, 8> { }; /* transmit data */
@@ -238,8 +237,6 @@ class Genode::rockchip_uart: Mmio
 	 */
 	void _put_char(char c)
 	{
-		//volatile uint32_t *sr =(uint32_t*)0xfeb50000;
-		//*sr='u';
 		while (!read<Sr2::Txdc>());//0b00100000) ;
 		write<Txd::Tx_data>(c);
 	}
@@ -254,18 +251,8 @@ class Genode::rockchip_uart: Mmio
 		 *
 		 * \param base  device MMIO base
 		 */
-		rockchip_uart(addr_t base, uint32_t, uint32_t) : Mmio(base)
+		rockchip_uart(addr_t base, uint32_t, uint32_t) : Mmio({(char*)base,Mmio::SIZE})
 		{
-		//	volatile uint32_t *sr = (uint32_t*)base;
-		//	*sr='F';
-//			*mmio_to_virt(0xff1a0000)='F';
-		//uint32_t *sr =(uint32_t*)0xff1a0000;
-		//*sr='u';
-/*			write<Cr1>(Cr1::init_value());
-			write<Cr2>(Cr2::init_value());
-			write<Cr3>(Cr3::init_value());
-			
-			write<Cr4>(Cr4::init_value());*/
 		}
 
 		/**
@@ -278,4 +265,4 @@ class Genode::rockchip_uart: Mmio
 		}
 };
 
-#endif /* _INCLUDE__DRIVERS__UART__IMX_H_ */
+#endif /* _INCLUDE__DRIVERS__UART__ROCKCHIP_H_ */

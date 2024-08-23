@@ -1,3 +1,6 @@
 A repo for Genode on Rockchip ARM socs.
-Only RK3588 at the moment. RK3399 will be added later.
+
+
+
+RK3588 and RK3399 SoCs are supported. USB driver is currently in a non working state.
 
